@@ -1,0 +1,119 @@
+#!/bin/bash
+
+####### Variables
+PE_VERSION="2016.4.0"
+IMAGE_NAME="jefferyb/puppet-enterprise:${PE_VERSION}"
+ADMIN_PASSWORD="welcometopuppet"
+PUPPET_MASTER_HOSTNAME="puppet.example.com"
+PE_DOWNLOAD_LINK="LINK_TO_PE_DOWNLOAD"
+TIMEZONE="America/Chicago"
+####### End Variables #######
+
+apt-get update
+apt-get install -y lsb-release wget
+
+echo "${TIMEZONE}" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+
+locale-gen en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+cd /root/puppet
+. /etc/lsb-release
+if [ ! -f puppet-enterprise-${PE_VERSION}-ubuntu-${DISTRIB_RELEASE}-amd64.tar.gz ]; then
+  wget -O puppet-enterprise-${PE_VERSION}-ubuntu-${DISTRIB_RELEASE}-amd64.tar.gz ${PE_DOWNLOAD_LINK}
+fi
+tar zxf puppet-enterprise-${PE_VERSION}-ubuntu-${DISTRIB_RELEASE}-amd64.tar.gz
+cd puppet-enterprise-${PE_VERSION}-ubuntu-${DISTRIB_RELEASE}-amd64
+
+# Create a pe.conf file
+cat > pe.conf <<'PECONF'
+{
+  "console_admin_password": "ADMIN_PASSWORD",
+  "puppet_enterprise::puppet_master_host": "PUPPET_MASTER_HOSTNAME",
+  "pe_install::puppet_master_dnsaltnames": [
+    "puppet"
+  ]
+}
+PECONF
+
+# Configure pe.conf
+sed -i "s/ADMIN_PASSWORD/${ADMIN_PASSWORD}/g" pe.conf && \
+sed -i "s/PUPPET_MASTER_HOSTNAME/${PUPPET_MASTER_HOSTNAME}/g" pe.conf
+
+./puppet-enterprise-installer -c pe.conf
+
+# To complete the setup of this system
+puppet agent -t
+
+# Create an ENTRYPOINT file
+cat > /usr/local/bin/start-puppet-enterprise <<'ENTRYPOINT'
+#!/bin/bash
+
+# Turn on autosign
+AUTOSIGN="${AUTOSIGN:-}"
+if [[ -n "$AUTOSIGN" ]]; then
+    echo "[ INFO ] * Turning on autosign..."
+    puppet resource pe_file_line ensure=present line='autosign = true' path=/etc/puppetlabs/puppet/puppet.conf
+    puppet config set autosign "$AUTOSIGN" --section master
+fi
+
+puppet resource service mcollective ensure=running enable=true
+puppet resource service pxp-agent ensure=running enable=true
+puppet resource service puppet ensure=running enable=true
+puppet resource service pe-postgresql ensure=running enable=true
+puppet resource service pe-activemq ensure=running enable=true
+puppet resource service pe-puppetdb ensure=running enable=true
+puppet resource service pe-nginx ensure=running enable=true
+puppet resource service pe-puppetserver ensure=running enable=true
+puppet resource service pe-orchestration-services ensure=running enable=true
+puppet resource service pe-console-services ensure=running enable=true
+
+####### </ Jeffery Bagirimvano >
+ENTRYPOINT
+
+# Change permissions
+chmod +x /usr/local/bin/start-puppet-enterprise
+
+# Doing a little clean up
+rm -fr puppet-enterprise-${PE_VERSION}-ubuntu-${DISTRIB_RELEASE}-amd64
+
+# Show the to commit & run command
+echo
+echo
+echo
+echo "
+Make sure you run the command below to create/commit the image:
+
+docker commit \
+--change='CMD /usr/local/bin/start-puppet-enterprise && echo \"Started Puppet Enterprise\" && tail -f /var/log/dmesg -f /var/log/puppetlabs/console-services/console-services*' \
+-c 'EXPOSE 443' \
+-c 'EXPOSE 8140' \
+-c 'EXPOSE 8142' \
+-c 'EXPOSE 61613' \
+-c 'TZ America/Chicago' \
+-c 'VOLUME /etc/puppetlabs' \
+-c 'VOLUME /opt/puppetlabs' \
+-c 'VOLUME /var/log/puppetlabs' \
+create-puppet-image  ${IMAGE_NAME}
+"
+
+echo
+echo
+echo "
+And to run/start an instance, run:
+
+docker rm -fv puppet-enterprise
+docker run -d \
+-h ${PUPPET_MASTER_HOSTNAME} \
+--name puppet-enterprise \
+-p 443:443 \
+-p 8140:8140 \
+-p 8142:8142 \
+-p 61613:61613 \
+${IMAGE_NAME} 
+
+To check the logs, run:
+docker logs -f puppet-enterprise
+"

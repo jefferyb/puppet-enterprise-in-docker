@@ -1,0 +1,50 @@
+#!/bin/bash
+
+####### Variables
+PE_VERSION="2016.4.0"
+IMAGE_NAME="jefferyb/puppet-enterprise:${PE_VERSION}"
+PUPPET_MASTER_HOSTNAME="puppet.example.com"
+####### End Variables #######
+
+# Make sure we have the latest version of ubuntu:14.04
+docker pull ubuntu:14.04
+
+# Start a docker container that we're going to use
+docker run -d -it --name create-puppet-image -h ${PUPPET_MASTER_HOSTNAME} -v $(pwd):/root/puppet ubuntu:14.04
+
+# Start the install in the container
+docker exec -it create-puppet-image /root/puppet/install-puppet-in-docker
+
+# Create our puppet enterprise image
+docker stop create-puppet-image
+docker commit \
+-c 'EXPOSE 443' \
+-c 'EXPOSE 8140' \
+-c 'EXPOSE 8142' \
+-c 'EXPOSE 61613' \
+-c 'VOLUME /etc/puppetlabs' \
+-c 'VOLUME /opt/puppetlabs' \
+-c 'VOLUME /var/log/puppetlabs' \
+--change='CMD /usr/local/bin/start-puppet-enterprise && echo Started Puppet Enterprise && tail -f /var/log/puppetlabs/console-services/console-services*' \
+create-puppet-image  ${IMAGE_NAME}
+
+# Run/Test our image
+docker rm -fv test-puppet-enterprise
+docker run -d \
+-h ${PUPPET_MASTER_HOSTNAME} \
+--name test-puppet-enterprise \
+-e 'AUTOSIGN=true' \
+-e 'TERM=xterm' \
+-e 'TZ=America/Chicago' \
+-p 443:443 \
+-p 8140:8140 \
+-p 8142:8142 \
+-p 61613:61613 \
+-v puppetlabs-etc:/etc/puppetlabs \
+-v puppetlabs-opt:/opt/puppetlabs \
+-v puppetlabs-logs:/var/log/puppetlabs \
+${IMAGE_NAME}
+
+# Check the logs
+docker logs -f test-puppet-enterprise
+
