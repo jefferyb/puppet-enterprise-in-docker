@@ -70,6 +70,7 @@ Version:
 {% endhighlight %}
 
 You can then access Puppet Enterprise at:
+
 - https://puppet.example.com or whatever you set `PUPPET_MASTER_HOSTNAME` or the hostname of the machine you're running docker on and the port number mapped to 443
 - Username: `admin`
 - Password: `welcometopuppet` or which ever one that you set at `ADMIN_PASSWORD`
@@ -163,6 +164,7 @@ cat > pe.conf <<'PECONF'
   ]
 }
 PECONF
+
 {% endhighlight %}
 
 where `ADMIN_PASSWORD` is the password for the `admin` user,
