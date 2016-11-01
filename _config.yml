@@ -1,0 +1,26 @@
+# Setup
+title:            Puppet Enterprise in Docker
+tagline:          'Install & Run Puppet Enterprise in Docker'
+description:      'Install & Run Puppet Enterprise in Docker'
+url:              https://jefferyb.github.io/
+baseurl:          /
+
+author:
+  name:           'Jeffery Bagirimvano'
+  url:            https://www.google.com/+JefferyBagirimvano
+
+# Dependencies
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Permalinks
+permalink:        pretty
+
+# Gems
+gems: [jekyll-paginate, jekyll-gist]
+
+paginate:         3
+
+github:
+  repo:           https://github.com/jefferyb/puppet-enterprise-in-docker

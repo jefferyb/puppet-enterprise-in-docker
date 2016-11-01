@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Puppet Enterprise in Docker &middot; Puppet Enterprise in Docker
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Puppet Enterprise in Docker
+        </a>
+      </h1>
+      <p class="lead">Install & Run Puppet Enterprise in Docker</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/jefferyb/puppet-enterprise-in-docker">GitHub project</a>
+    </nav>
+
+    <p>&copy; 2016. All rights reserved.</p>
+    
+    <div><small><small><small>Icons made by <a href="http://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small></small></small></div>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Puppet Enterprise in Docker</h1>
+  <span class="post-date">31 Oct 2016</span>
+  <p>I wanted to try Puppet Enterprise but didn’t really want to install it on my system, so 
+I created a <a href="https://github.com/jefferyb/puppet-enterprise-in-docker">script to create a Puppet Enterprise Docker Image</a> for me.</p>
+
+<h2 id="how-to-use-it">How to use it</h2>
+
+<p>In short:</p>
+<ul>
+  <li>Download “puppet-enterprise-2016.4.0-ubuntu-14.04-amd64.tar.gz” from <a href="https://puppet.com/download-puppet-enterprise">PuppetLabs</a>.</li>
+  <li>Clone my <a href="https://github.com/jefferyb/puppet-enterprise-in-docker.git">Puppet Enterprise Scripts</a> repo</li>
+  <li>Make sure that the <code class="highlighter-rouge">puppet-enterprise-2016.4.0-ubuntu-14.04-amd64.tar.gz</code> file is in the cloned repo, <code class="highlighter-rouge">puppet-enterprise-in-docker</code>, or that you have the download link variable, <code class="highlighter-rouge">PE_DOWNLOAD_LINK</code>, set in <code class="highlighter-rouge">install-puppet-in-docker</code> file</li>
+  <li>Edit the variables section, such as <code class="highlighter-rouge">IMAGE_NAME</code>, <code class="highlighter-rouge">PUPPET_MASTER_HOSTNAME</code> and <code class="highlighter-rouge">ADMIN_PASSWORD</code> at the top of <code class="highlighter-rouge">create-a-puppet-enterprise-docker-image</code> and <code class="highlighter-rouge">install-puppet-in-docker</code> files to suite you</li>
+  <li>Run the <code class="highlighter-rouge">create-a-puppet-enterprise-docker-image</code> script</li>
+</ul>
+
+<h4 id="bash">Bash</h4>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone https://github.com/jefferyb/puppet-enterprise-in-docker.git
+<span class="gp">$ </span>mv puppet-enterprise-2016.4.0-ubuntu-14.04-amd64.tar.gz puppet-enterprise-in-docker
+<span class="gp">$ </span><span class="nb">cd </span>puppet-enterprise-in-docker
+<span class="gp">$ </span>./create-a-puppet-enterprise-docker-image
+</code></pre>
+</div>
+<p>If all goes well, it should launch an instance and if you run <code class="highlighter-rouge">docker ps</code>, you should see a running container, <code class="highlighter-rouge">test-puppet-enterprise</code> with autosign turned on. 
+You can then run:</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>docker run --rm --link <span class="nb">test</span>-puppet-enterprise:puppet puppet/puppet-agent-alpine
+</code></pre>
+</div>
+<p>and you should see something like:</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>Info: Creating a new SSL key <span class="k">for </span>0b7a0a1c10ec
+Info: Caching certificate <span class="k">for </span>ca
+Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
+Info: Creating a new SSL certificate request <span class="k">for </span>0b7a0a1c10ec
+Info: Certificate Request fingerprint <span class="o">(</span>SHA256<span class="o">)</span>: 25:A9:66:E1:E6:59:D0:8B:A2:55:10:83:EC:B2:3F:70:61:9D:26:A0:34:1F:45:49:74:E2:17:7D:91:4C:25:4C
+Info: Caching certificate <span class="k">for </span>0b7a0a1c10ec
+Info: Caching certificate_revocation_list <span class="k">for </span>ca
+Info: Caching certificate <span class="k">for </span>ca
+Info: Using configured environment <span class="s1">'production'</span>
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Notice: /File[/opt/puppetlabs/puppet/cache/lib/facter]/ensure: created
+Notice: /File[/opt/puppetlabs/puppet/cache/lib/facter/aio_agent_build.rb]/ensure: defined content as <span class="s1">'{md5}cdcc1ff07bc245c66cc1d46be56b3af5'</span>
+...
+Notice: /File[/opt/puppetlabs/puppet/cache/lib/shared/pe_server_version.rb]/ensure: defined content as <span class="s1">'{md5}f3d3fc8776512ae73d3293c97b8f3dfe'</span>
+Info: Loading facts
+Info: Caching catalog <span class="k">for </span>0b7a0a1c10ec
+Info: Applying configuration version <span class="s1">'1477951972'</span>
+Info: Creating state file /opt/puppetlabs/puppet/cache/state/state.yaml
+Notice: Applied catalog <span class="k">in </span>0.04 seconds
+Changes:
+Events:
+Resources:
+            Total: 7
+Time:
+         Schedule: 0.00
+   Config retrieval: 0.72
+            Total: 0.73
+         Last run: 1477951972
+       Filebucket: 0.00
+Version:
+           Config: 1477951972
+           Puppet: 4.6.2
+
+</code></pre>
+</div>
+
+<p>You can then access Puppet Enterprise at:</p>
+<ul>
+  <li>https://puppet.example.com or whatever you set <code class="highlighter-rouge">PUPPET_MASTER_HOSTNAME</code> or the hostname of the machine you’re running docker on and the port number mapped to 443</li>
+  <li>Username: <code class="highlighter-rouge">admin</code></li>
+  <li>Password: <code class="highlighter-rouge">welcometopuppet</code> or which ever one that you set at <code class="highlighter-rouge">ADMIN_PASSWORD</code></li>
+</ul>
+
+<h2 id="the-long-version">The long version:</h2>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>I used the <a href="https://hub.docker.com/_/ubuntu/">Ubuntu 14.04</a> image to install, but to successfully install Puppet Enterprise, you’ll need to:</p>
+
+<h5 id="set-the-locale">1. - Set the <code class="highlighter-rouge">locale</code></h5>
+
+<p>You can check by running <code class="highlighter-rouge">locale</code></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">root@0fb9e6958e1c:~# </span>locale
+<span class="nv">LANG</span><span class="o">=</span>
+<span class="nv">LANGUAGE</span><span class="o">=</span>
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_PAPER</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_NAME</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_ADDRESS</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_TELEPHONE</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_MEASUREMENT</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_IDENTIFICATION</span><span class="o">=</span><span class="s2">"POSIX"</span>
+<span class="nv">LC_ALL</span><span class="o">=</span>
+</code></pre>
+</div>
+
+<p>To set <code class="highlighter-rouge">locale</code> in the Dockerfile, do:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8 
+</code></pre>
+</div>
+
+<p>or run:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">root@0fb9e6958e1c:~# </span>locale-gen en_US.UTF-8
+Generating locales...
+  en_US.UTF-8... <span class="k">done
+</span>Generation complete.
+<span class="gp">root@0fb9e6958e1c:~# </span><span class="nb">export </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+<span class="gp">root@0fb9e6958e1c:~# </span><span class="nb">export </span><span class="nv">LANGUAGE</span><span class="o">=</span>en_US.UTF-8
+<span class="gp">root@0fb9e6958e1c:~# </span><span class="nb">export </span><span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+</code></pre>
+</div>
+<p>You can test it or check it again, and you should have something like this:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">root@0fb9e6958e1c:~# </span>locale
+<span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+<span class="nv">LANGUAGE</span><span class="o">=</span>en_US.UTF-8
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_PAPER</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_NAME</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_ADDRESS</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_TELEPHONE</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_MEASUREMENT</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_IDENTIFICATION</span><span class="o">=</span><span class="s2">"en_US.UTF-8"</span>
+<span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+</code></pre>
+</div>
+
+<h5 id="download-puppet-enterprise">2. - Download Puppet Enterprise</h5>
+
+<p>You can download the tarball for the current version of Puppet Enterprise at <a href="https://puppet.com/download-puppet-enterprise">https://puppet.com/download-puppet-enterprise</a>.
+Unpack the tarball by running <code class="highlighter-rouge">tar -xf &lt;TARBALL_FILENAME&gt;</code></p>
+
+<h5 id="create-a-peconf-file">3. - Create a pe.conf file</h5>
+
+<p>Puppet Enterprise uses a pe.conf file to install in Text-mode installation</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cat &gt; pe.conf <span class="sh">&lt;&lt;'PECONF'
+{
+  "console_admin_password": "ADMIN_PASSWORD",
+  "puppet_enterprise::puppet_master_host": "PUPPET_MASTER_HOSTNAME",
+  "pe_install::puppet_master_dnsaltnames": [
+    "puppet"
+  ]
+}
+PECONF
+</span></code></pre>
+</div>
+
+<p>where <code class="highlighter-rouge">ADMIN_PASSWORD</code> is the password for the <code class="highlighter-rouge">admin</code> user,
+and <code class="highlighter-rouge">PUPPET_MASTER_HOSTNAME</code> is the hostname you want to use, like puppet.example.com or you can use <code class="highlighter-rouge">"%{::trusted.certname}"</code> for its FQDN.</p>
+
+<h3 id="install-puppet-enterprise">Install Puppet Enterprise</h3>
+
+<p>To install PE, cd into the unpacked folder and run:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./puppet-enterprise-installer -c &lt;FULL PATH TO pe.conf&gt;
+</code></pre>
+</div>
+
+<p>To complete the setup of the system, run:</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>puppet agent -t
+</code></pre>
+</div>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+  <!--Google Analytics-->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-86575135-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</html>
