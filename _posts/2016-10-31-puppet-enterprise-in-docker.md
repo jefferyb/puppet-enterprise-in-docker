@@ -182,3 +182,7 @@ To complete the setup of the system, run:
 {% highlight bash %}
 puppet agent -t
 {% endhighlight %}
+
+Once it's done, you can point your browser to **https**://YOUR_HOSTNAME and login with **admin** and whatever you set **ADMIN_PASSWORD** to...
+
+![Image of Puppet Enterprise Login Page](/puppet-enterprise-in-docker/images/PE_Login.png)

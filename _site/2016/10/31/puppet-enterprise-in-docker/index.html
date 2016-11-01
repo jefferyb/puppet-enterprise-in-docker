@@ -145,6 +145,7 @@ Version:
            Puppet: 4.6.2</code></pre></figure>
 
 <p>You can then access Puppet Enterprise at:</p>
+
 <ul>
   <li>https://puppet.example.com or whatever you set <code class="highlighter-rouge">PUPPET_MASTER_HOSTNAME</code> or the hostname of the machine you’re running docker on and the port number mapped to 443</li>
   <li>Username: <code class="highlighter-rouge">admin</code></li>
@@ -246,6 +247,9 @@ and <code class="highlighter-rouge">PUPPET_MASTER_HOSTNAME</code> is the hostnam
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">puppet agent -t</code></pre></figure>
 
+<p>Once it’s done, you can point your browser to <strong>https</strong>://YOUR_HOSTNAME and login with <strong>admin</strong> and whatever you set <strong>ADMIN_PASSWORD</strong> to…</p>
+
+<p><img src="/puppet-enterprise-in-docker/images/PE_Login.png" alt="Image of Puppet Enterprise Login Page" /></p>
 
 </div>
 

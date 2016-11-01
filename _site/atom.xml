@@ -4,7 +4,7 @@
  <title>Puppet Enterprise in Docker</title>
  <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/atom.xml" rel="self"/>
  <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/"/>
- <updated>2016-11-01T08:06:15+00:00</updated>
+ <updated>2016-11-01T08:30:23+00:00</updated>
  <id>https://jefferyb.github.io/puppet-enterprise-in-docker</id>
  <author>
    <name>Jeffery Bagirimvano</name>
@@ -81,6 +81,7 @@ Version:
            Puppet: 4.6.2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;You can then access Puppet Enterprise at:&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;https://puppet.example.com or whatever you set &lt;code class=&quot;highlighter-rouge&quot;&gt;PUPPET_MASTER_HOSTNAME&lt;/code&gt; or the hostname of the machine you’re running docker on and the port number mapped to 443&lt;/li&gt;
   &lt;li&gt;Username: &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt;&lt;/li&gt;
@@ -182,6 +183,9 @@ and &lt;code class=&quot;highlighter-rouge&quot;&gt;PUPPET_MASTER_HOSTNAME&lt;/c
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;puppet agent -t&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
+&lt;p&gt;Once it’s done, you can point your browser to &lt;strong&gt;https&lt;/strong&gt;://YOUR_HOSTNAME and login with &lt;strong&gt;admin&lt;/strong&gt; and whatever you set &lt;strong&gt;ADMIN_PASSWORD&lt;/strong&gt; to…&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/puppet-enterprise-in-docker/images/PE_Login.png&quot; alt=&quot;Image of Puppet Enterprise Login Page&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
