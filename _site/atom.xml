@@ -4,7 +4,7 @@
  <title>Puppet Enterprise in Docker</title>
  <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/atom.xml" rel="self"/>
  <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/"/>
- <updated>2016-11-01T07:51:46+00:00</updated>
+ <updated>2016-11-01T07:55:12+00:00</updated>
  <id>https://jefferyb.github.io/puppet-enterprise-in-docker</id>
  <author>
    <name>Jeffery Bagirimvano</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Puppet Enterprise in Docker</title>
-   <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/2016/11/01/puppet-enterprise-in-docker/"/>
-   <updated>2016-11-01T00:00:00+00:00</updated>
-   <id>https://jefferyb.github.io/puppet-enterprise-in-docker/2016/11/01/puppet-enterprise-in-docker</id>
+   <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/2016/10/31/puppet-enterprise-in-docker/"/>
+   <updated>2016-10-31T00:00:00+00:00</updated>
+   <id>https://jefferyb.github.io/puppet-enterprise-in-docker/2016/10/31/puppet-enterprise-in-docker</id>
    <content type="html">&lt;p&gt;I wanted to try Puppet Enterprise but didn’t really want to install it on my system, so 
 I created a &lt;a href=&quot;https://github.com/jefferyb/puppet-enterprise-in-docker&quot;&gt;script to create a Puppet Enterprise Docker Image&lt;/a&gt; for me.&lt;/p&gt;
 
