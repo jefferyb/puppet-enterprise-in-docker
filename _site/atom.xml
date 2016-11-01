@@ -4,7 +4,7 @@
  <title>Puppet Enterprise in Docker</title>
  <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/atom.xml" rel="self"/>
  <link href="https://jefferyb.github.io/puppet-enterprise-in-docker/"/>
- <updated>2016-11-01T07:55:12+00:00</updated>
+ <updated>2016-11-01T08:06:15+00:00</updated>
  <id>https://jefferyb.github.io/puppet-enterprise-in-docker</id>
  <author>
    <name>Jeffery Bagirimvano</name>
@@ -33,23 +33,20 @@ I created a &lt;a href=&quot;https://github.com/jefferyb/puppet-enterprise-in-do
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;bash&quot;&gt;Bash&lt;/h4&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone https://github.com/jefferyb/puppet-enterprise-in-docker.git
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone https://github.com/jefferyb/puppet-enterprise-in-docker.git
 &lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;mv puppet-enterprise-2016.4.0-ubuntu-14.04-amd64.tar.gz puppet-enterprise-in-docker
 &lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;puppet-enterprise-in-docker
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;./create-a-puppet-enterprise-docker-image
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;./create-a-puppet-enterprise-docker-image&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;If all goes well, it should launch an instance and if you run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker ps&lt;/code&gt;, you should see a running container, &lt;code class=&quot;highlighter-rouge&quot;&gt;test-puppet-enterprise&lt;/code&gt; with autosign turned on. 
 You can then run:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;docker run --rm --link &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;-puppet-enterprise:puppet puppet/puppet-agent-alpine
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;docker run --rm --link &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;-puppet-enterprise:puppet puppet/puppet-agent-alpine&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;and you should see something like:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Info: Creating a new SSL key &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;0b7a0a1c10ec
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Info: Creating a new SSL key &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;0b7a0a1c10ec
 Info: Caching certificate &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;ca
 Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
 Info: Creating a new SSL certificate request &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;0b7a0a1c10ec
@@ -81,9 +78,7 @@ Time:
        Filebucket: 0.00
 Version:
            Config: 1477951972
-           Puppet: 4.6.2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+           Puppet: 4.6.2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;You can then access Puppet Enterprise at:&lt;/p&gt;
 &lt;ul&gt;
@@ -102,7 +97,7 @@ Version:
 
 &lt;p&gt;You can check by running &lt;code class=&quot;highlighter-rouge&quot;&gt;locale&lt;/code&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;locale
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;locale
 &lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;LANGUAGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;LC_CTYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POSIX&quot;&lt;/span&gt;
@@ -117,33 +112,28 @@ Version:
 &lt;span class=&quot;nv&quot;&gt;LC_TELEPHONE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POSIX&quot;&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;LC_MEASUREMENT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POSIX&quot;&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;LC_IDENTIFICATION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POSIX&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;To set &lt;code class=&quot;highlighter-rouge&quot;&gt;locale&lt;/code&gt; in the Dockerfile, do:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN locale-gen en_US.UTF-8  
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;RUN locale-gen en_US.UTF-8  
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+ENV LC_ALL en_US.UTF-8 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;or run:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;locale-gen en_US.UTF-8
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;locale-gen en_US.UTF-8
 Generating locales...
   en_US.UTF-8... &lt;span class=&quot;k&quot;&gt;done
 &lt;/span&gt;Generation complete.
 &lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
 &lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANGUAGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
-&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;You can test it or check it again, and you should have something like this:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;locale
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@0fb9e6958e1c:~# &lt;/span&gt;locale
 &lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
 &lt;span class=&quot;nv&quot;&gt;LANGUAGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
 &lt;span class=&quot;nv&quot;&gt;LC_CTYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en_US.UTF-8&quot;&lt;/span&gt;
@@ -158,9 +148,7 @@ Generating locales...
 &lt;span class=&quot;nv&quot;&gt;LC_TELEPHONE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en_US.UTF-8&quot;&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;LC_MEASUREMENT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en_US.UTF-8&quot;&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;LC_IDENTIFICATION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en_US.UTF-8&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h5 id=&quot;download-puppet-enterprise&quot;&gt;2. - Download Puppet Enterprise&lt;/h5&gt;
 
@@ -171,7 +159,7 @@ Unpack the tarball by running &lt;code class=&quot;highlighter-rouge&quot;&gt;ta
 
 &lt;p&gt;Puppet Enterprise uses a pe.conf file to install in Text-mode installation&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat &amp;gt; pe.conf &lt;span class=&quot;sh&quot;&gt;&amp;lt;&amp;lt;'PECONF'
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat &amp;gt; pe.conf &lt;span class=&quot;sh&quot;&gt;&amp;lt;&amp;lt;'PECONF'
 {
   &quot;console_admin_password&quot;: &quot;ADMIN_PASSWORD&quot;,
   &quot;puppet_enterprise::puppet_master_host&quot;: &quot;PUPPET_MASTER_HOSTNAME&quot;,
@@ -179,9 +167,7 @@ Unpack the tarball by running &lt;code class=&quot;highlighter-rouge&quot;&gt;ta
     &quot;puppet&quot;
   ]
 }
-PECONF
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;PECONF&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;where &lt;code class=&quot;highlighter-rouge&quot;&gt;ADMIN_PASSWORD&lt;/code&gt; is the password for the &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; user,
 and &lt;code class=&quot;highlighter-rouge&quot;&gt;PUPPET_MASTER_HOSTNAME&lt;/code&gt; is the hostname you want to use, like puppet.example.com or you can use &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;%{::trusted.certname}&quot;&lt;/code&gt; for its FQDN.&lt;/p&gt;
@@ -190,14 +176,12 @@ and &lt;code class=&quot;highlighter-rouge&quot;&gt;PUPPET_MASTER_HOSTNAME&lt;/c
 
 &lt;p&gt;To install PE, cd into the unpacked folder and run:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./puppet-enterprise-installer -c &amp;lt;FULL PATH TO pe.conf&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;./puppet-enterprise-installer -c &amp;lt;FULL PATH TO pe.conf&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;To complete the setup of the system, run:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;puppet agent -t
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;puppet agent -t&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 </content>
  </entry>
  
