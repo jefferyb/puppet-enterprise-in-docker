@@ -2,8 +2,8 @@
 title:            Puppet Enterprise in Docker
 tagline:          'Install & Run Puppet Enterprise in Docker'
 description:      'Install & Run Puppet Enterprise in Docker'
-url:              https://jefferyb.github.io/
-baseurl:          /
+url:              https://jefferyb.github.io/puppet-enterprise-in-docker
+baseurl:          /puppet-enterprise-in-docker/
 
 author:
   name:           'Jeffery Bagirimvano'
