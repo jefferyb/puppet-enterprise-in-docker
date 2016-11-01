@@ -3,6 +3,8 @@ Scripts to install Puppet Enterprise in Docker
 
 # How to use it
 
+[Check out this page for more information](https://jefferyb.github.io/puppet-enterprise-in-docker/)
+
 In short:
 * Download "puppet-enterprise-2016.4.0-ubuntu-14.04-amd64.tar.gz" from [PuppetLabs](https://puppet.com/download-puppet-enterprise).
 * Clone my [Puppet Enterprise Scripts](https://github.com/jefferyb/puppet-enterprise-in-docker.git) repo
@@ -17,5 +19,3 @@ $ mv puppet-enterprise-2016.4.0-ubuntu-14.04-amd64.tar.gz puppet-enterprise-in-d
 $ cd puppet-enterprise-in-docker
 $ ./create-a-puppet-enterprise-docker-image
 ```
-
-[Check out this page for more information](https://jefferyb.github.io/puppet-enterprise-in-docker/)
